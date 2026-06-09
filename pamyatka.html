@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Гид по тканям</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Segoe UI', Arial, sans-serif;
+            background: #f0f0f0;
+            display: flex;
+            justify-content: center;
+            padding: 10px;
+        }
+        .container {
+            width: 100%;
+            max-width: 500px;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+
+        /* Заголовок */
+        .header {
+            text-align: center;
+            padding: 20px 15px 15px;
+            border-bottom: 2px solid #eee;
+        }
+        .header h1 {
+            font-size: 22px;
+            color: #2D2D2D;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        .header p {
+            font-size: 13px;
+            color: #999;
+            margin-top: 3px;
+        }
+
+        /* Вкладки */
+        .tabs {
+            display: flex;
+            border-bottom: 2px solid #eee;
+        }
+        .tab-btn {
+            flex: 1;
+            padding: 14px;
+            border: none;
+            background: #fafafa;
+            font-size: 15px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: 0.2s;
+            color: #888;
+            letter-spacing: 0.5px;
+        }
+        .tab-btn.active {
+            background: white;
+            color: #2D2D2D;
+            border-bottom: 3px solid #C4A882;
+            margin-bottom: -2px;
+        }
+        .tab-btn:first-child.active { border-bottom-color: #C4A882; }
+        .tab-btn:last-child.active { border-bottom-color: #7A8B9A; }
+
+        /* Контент вкладок */
+        .tab-content { display: none; padding: 15px; }
+        .tab-content.active { display: block; }
+
+        /* Карточка */
+        .card {
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 12px;
+            border-left: 4px solid #ccc;
+        }
+        .card:last-child { margin-bottom: 0; }
+        .card-cotton { background: #F5F0E8; border-left-color: #C4A882; }
+        .card-satin { background: #EFE2C5; border-left-color: #D4A843; }
+        .card-stripe {
+            background: #EADCC8;
+            border-left-color: #8B7355;
+            background-image: repeating-linear-gradient(45deg, transparent, transparent 6px, rgba(139,115,85,0.06) 6px, rgba(139,115,85,0.06) 12px);
+        }
+        .card-synth { background: #EEF2F5; border-left-color: #7A8B9A; }
+        .card-micro { background: #E0E5EC; border-left-color: #5A6C7D; }
+
+        /* Заглушка для фото */
+        .photo-placeholder {
+            width: 100%;
+            height: 140px;
+            background: rgba(255,255,255,0.5);
+            border: 2px dashed #ccc;
+            border-radius: 8px;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #999;
+            font-size: 13px;
+            text-align: center;
+            overflow: hidden;
+        }
+        .card-cotton .photo-placeholder, .card-satin .photo-placeholder, .card-stripe .photo-placeholder { border-color: #C4A882; color: #A08060; }
+        .card-synth .photo-placeholder, .card-micro .photo-placeholder { border-color: #7A8B9A; color: #6B7B8A; }
+        .photo-placeholder img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 8px;
+        }
+
+        .card h3 {
+            font-size: 17px;
+            color: #2D2D2D;
+            margin-bottom: 1px;
+        }
+        .card .subtitle {
+            font-size: 11px;
+            color: #999;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 10px;
+        }
+        .prop {
+            display: flex;
+            margin-bottom: 3px;
+            font-size: 12px;
+            line-height: 1.4;
+        }
+        .prop-label {
+            font-weight: 600;
+            min-width: 105px;
+            color: #666;
+            flex-shrink: 0;
+        }
+        .prop-value { color: #333; }
+
+        /* Блок ухода */
+        .care {
+            background: rgba(255,255,255,0.6);
+            padding: 10px 12px;
+            border-radius: 6px;
+            margin-top: 10px;
+            font-size: 11px;
+        }
+        .care strong {
+            color: #2D2D2D;
+            display: block;
+            margin-bottom: 4px;
+            font-size: 12px;
+        }
+        .care ul { list-style: none; padding: 0; }
+        .care li { margin-bottom: 2px; color: #555; }
+        .care li::before { content: "• "; color: #C4A882; }
+        .card-synth .care li::before, .card-micro .care li::before { content: "• "; color: #7A8B9A; }
+
+        /* Предупреждение */
+        .warning {
+            background: #FFF9C4;
+            padding: 12px 15px;
+            border-radius: 8px;
+            margin: 15px;
+            font-size: 12px;
+            color: #5D4037;
+            display: flex;
+            align-items: flex-start;
+            gap: 8px;
+            border: 1px solid #FFE082;
+        }
+        .warning .icon { font-size: 18px; flex-shrink: 0; }
+
+        /* Адаптив */
+        @media (max-width: 400px) {
+            .prop-label { min-width: 85px; font-size: 11px; }
+            .prop-value { font-size: 11px; }
+            .card h3 { font-size: 16px; }
+            .photo-placeholder { height: 110px; font-size: 12px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+
+        <!-- Заголовок -->
+        <div class="header">
+            <h1>🧵 Гид по тканям</h1>
+            <p>Свойства и уход</p>
+        </div>
+
+        <!-- Кнопки вкладок -->
+        <div class="tabs">
+            <button class="tab-btn active" onclick="switchTab(event, 'tab-cotton')">🌿 100% Хлопок</button>
+            <button class="tab-btn" onclick="switchTab(event, 'tab-synth')">⚙️ Смесовые</button>
+        </div>
+
+        <!-- Вкладка: Хлопок -->
+        <div id="tab-cotton" class="tab-content active">
+
+            <!-- Бязь -->
+            <div class="card card-cotton">
+                <div class="photo-placeholder">
+                    📷 Место для фото<br><small>Бязь (крупным планом)</small>
+                </div>
+                <h3>Бязь</h3>
+                <div class="subtitle">Calico</div>
+                <div class="prop"><span class="prop-label">Поверхность:</span><span class="prop-value">Матовая</span></div>
+                <div class="prop"><span class="prop-label">Наощупь:</span><span class="prop-value">Плотная, прочная</span></div>
+                <div class="prop"><span class="prop-label">Сминаемость:</span><span class="prop-value">Средняя</span></div>
+                <div class="prop"><span class="prop-label">Идеально для:</span><span class="prop-value">Постельное на каждый день, пелёнки</span></div>
+                <div class="care">
+                    <strong>Уход:</strong>
+                    <ul>
+                        <li>🌡️ Стирка 40–60°C</li>
+                        <li>🫧 Белое можно кипятить</li>
+                        <li>🔥 Гладить горячим утюгом</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Поплин -->
+            <div class="card card-cotton">
+                <div class="photo-placeholder">
+                    📷 Место для фото<br><small>Поплин (виден рубчик)</small>
+                </div>
+                <h3>Поплин</h3>
+                <div class="subtitle">Poplin</div>
+                <div class="prop"><span class="prop-label">Поверхность:</span><span class="prop-value">Гладкая, с рубчиком</span></div>
+                <div class="prop"><span class="prop-label">Наощупь:</span><span class="prop-value">Мягкая, приятная</span></div>
+                <div class="prop"><span class="prop-label">Сминаемость:</span><span class="prop-value">Меньше бязи</span></div>
+                <div class="prop"><span class="prop-label">Идеально для:</span><span class="prop-value">Качественное бельё, рубашки</span></div>
+                <div class="care">
+                    <strong>Уход:</strong>
+                    <ul>
+                        <li>🌡️ Деликатная 30–40°C</li>
+                        <li>🌀 Отжим на средних оборотах</li>
+                        <li>✨ Легко гладится</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Сатин -->
+            <div class="card card-satin">
+                <div class="photo-placeholder">
+                    📷 Место для фото<br><small>Сатин (блестящая сторона)</small>
+                </div>
+                <h3>Сатин</h3>
+                <div class="subtitle">Satin</div>
+                <div class="prop"><span class="prop-label">Поверхность:</span><span class="prop-value">Лицо — блестящее, изнанка — матовая</span></div>
+                <div class="prop"><span class="prop-label">Наощупь:</span><span class="prop-value">Прохладная, шелковистая</span></div>
+                <div class="prop"><span class="prop-label">Сминаемость:</span><span class="prop-value">Почти не мнётся</span></div>
+                <div class="prop"><span class="prop-label">Идеально для:</span><span class="prop-value">Премиальное бельё</span></div>
+                <div class="care">
+                    <strong>Уход:</strong>
+                    <ul>
+                        <li>🌡️ Деликатная 30–40°C</li>
+                        <li>🔄 Вывернуть наизнанку</li>
+                        <li>☀️ Не сушить на солнце</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Страйп-сатин -->
+            <div class="card card-stripe">
+                <div class="photo-placeholder">
+                    📷 Место для фото<br><small>Страйп-сатин (полосы)</small>
+                </div>
+                <h3>Страйп-сатин</h3>
+                <div class="subtitle">Stripe-satin</div>
+                <div class="prop"><span class="prop-label">Поверхность:</span><span class="prop-value">Матовые + блестящие полосы</span></div>
+                <div class="prop"><span class="prop-label">Наощупь:</span><span class="prop-value">Мягкий, прохладный</span></div>
+                <div class="prop"><span class="prop-label">Сминаемость:</span><span class="prop-value">Почти не мнётся</span></div>
+                <div class="prop"><span class="prop-label">Идеально для:</span><span class="prop-value">Элегантный текстиль</span></div>
+                <div class="care">
+                    <strong>Уход:</strong>
+                    <ul>
+                        <li>🌡️ Как за сатином</li>
+                        <li>🔄 Вывернуть наизнанку</li>
+                        <li>☀️ Беречь от солнца</li>
+                    </ul>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Вкладка: Смесовые -->
+        <div id="tab-synth" class="tab-content">
+
+            <!-- Тик 80/20 -->
+            <div class="card card-synth">
+                <div class="photo-placeholder">
+                    📷 Место для фото<br><small>Тик 80/20</small>
+                </div>
+                <h3>Тик 80/20</h3>
+                <div class="subtitle">80% хлопок + 20% ПЭ</div>
+                <div class="prop"><span class="prop-label">Поверхность:</span><span class="prop-value">Плотная, матовая</span></div>
+                <div class="prop"><span class="prop-label">Сминаемость:</span><span class="prop-value">Мало мнётся</span></div>
+                <div class="prop"><span class="prop-label">Особенность:</span><span class="prop-value">Держит пух/перо, быстро сохнет</span></div>
+                <div class="prop"><span class="prop-label">Идеально для:</span><span class="prop-value">Наперники, чехлы</span></div>
+                <div class="care">
+                    <strong>Уход:</strong>
+                    <ul>
+                        <li>🌡️ Стирка 40–60°C</li>
+                        <li>🌀 Можно машинную сушку</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Тик П/Э -->
+            <div class="card card-synth">
+                <div class="photo-placeholder">
+                    📷 Место для фото<br><small>Тик П/Э</small>
+                </div>
+                <h3>Тик П/Э</h3>
+                <div class="subtitle">~50–65% ПЭ + 35–50% хлопок</div>
+                <div class="prop"><span class="prop-label">Поверхность:</span><span class="prop-value">Очень плотная, гладкая</span></div>
+                <div class="prop"><span class="prop-label">Сминаемость:</span><span class="prop-value">Практически не мнётся</span></div>
+                <div class="prop"><span class="prop-label">Особенность:</span><span class="prop-value">Самый износостойкий, без усадки</span></div>
+                <div class="prop"><span class="prop-label">Идеально для:</span><span class="prop-value">Матрасники, жёсткая эксплуатация</span></div>
+                <div class="care">
+                    <strong>Уход:</strong>
+                    <ul>
+                        <li>🌡️ Стирка до 90°C</li>
+                        <li>⚡ Быстро сохнет</li>
+                        <li>🚫 Глажка почти не нужна</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Микрофибра -->
+            <div class="card card-micro">
+                <div class="photo-placeholder">
+                    📷 Место для фото<br><small>Микрофибра</small>
+                </div>
+                <h3>Микрофибра</h3>
+                <div class="subtitle">100% ПЭ или ПЭ + полиамид</div>
+                <div class="prop"><span class="prop-label">Поверхность:</span><span class="prop-value">Гладкая, ультратонкие волокна</span></div>
+                <div class="prop"><span class="prop-label">Сминаемость:</span><span class="prop-value">Не мнётся</span></div>
+                <div class="prop"><span class="prop-label">Особенность:</span><span class="prop-value">Отлично впитывает, мгновенно сохнет. Может электризоваться</span></div>
+                <div class="prop"><span class="prop-label">Идеально для:</span><span class="prop-value">Спорт, уборка</span></div>
+                <div class="care">
+                    <strong>Уход:</strong>
+                    <ul>
+                        <li>🌡️ Стирка до 40°C</li>
+                        <li>🚫 Без кондиционера</li>
+                        <li>🚫 Без хлорных отбеливателей</li>
+                        <li>🔥 Сушить вдали от батарей</li>
+                    </ul>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Предупреждение -->
+        <div class="warning">
+            <span class="icon">⚠️</span>
+            <span><strong>Важное правило:</strong> Всегда сверяйтесь с ярлычком на изделии перед стиркой. Производитель мог добавить пропитки или использовать особые смесовые нити.</span>
+        </div>
+
+    </div>
+
+    <script>
+        function switchTab(event, tabId) {
+            // Убрать активность со всех кнопок и контента
+            document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+            document.querySelectorAll('.tab-content').forEach(tab => tab.classList.remove('active'));
+            // Включить нужную вкладку
+            event.target.classList.add('active');
+            document.getElementById(tabId).classList.add('active');
+        }
+    </script>
+
+</body>
+</html>
