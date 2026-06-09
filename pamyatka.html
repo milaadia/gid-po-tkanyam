@@ -2,7 +2,8 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <title>Ткани под микроскопом — памятка</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Гид по тканям — полная версия</title>
     <style>
         * {
             margin: 0;
@@ -12,21 +13,21 @@
 
         body {
             background: #dadce0;
+            font-family: 'Segoe UI', 'Times New Roman', Georgia, serif;
+            padding: 30px 20px;
             display: flex;
             flex-direction: column;
             align-items: center;
-            padding: 30px 20px;
-            font-family: 'Segoe UI', 'Times New Roman', Georgia, serif;
         }
 
-        /* Страница А4 */
         .page {
-            max-width: 1100px;
+            max-width: 1200px;
             width: 100%;
             background: white;
-            padding: 35px 30px 45px 30px;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
-            margin-bottom: 30px;
+            border-radius: 8px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            padding: 40px 35px 50px;
+            margin-bottom: 35px;
             page-break-after: always;
             break-after: page;
         }
@@ -37,150 +38,176 @@
             break-after: auto;
         }
 
-        /* Строгий заголовок как у мамы */
+        /* Заголовок как у мамы — строгий */
         .title-main {
             font-size: 28px;
             font-weight: bold;
             text-transform: uppercase;
             text-align: center;
             letter-spacing: 2px;
-            border-bottom: 3px solid #1e3a5f;
+            border-bottom: 2px solid #1a3f2c;
             padding-bottom: 12px;
-            margin-bottom: 15px;
-            color: #1e3a5f;
+            margin-bottom: 8px;
+            color: #1a3f2c;
         }
 
         .title-sub {
             text-align: center;
             font-size: 16px;
+            color: #5a6e53;
             margin-bottom: 30px;
-            color: #2c5282;
             font-style: italic;
         }
 
-        /* Карточка ткани с лупой */
+        /* Карточка ткани */
         .fabric-card {
-            display: flex;
-            gap: 25px;
-            margin-bottom: 40px;
-            background: #fefefe;
-            border: 1px solid #cfdfed;
-            padding: 18px;
-            border-radius: 12px;
+            background: #ffffff;
+            border: 1px solid #e0e6dc;
+            border-radius: 20px;
+            margin-bottom: 30px;
+            overflow: hidden;
             page-break-inside: avoid;
             break-inside: avoid;
-            box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
         }
 
-        /* Левая колонка — место под микроскопом */
-        .microscope {
-            flex: 1.2;
-            min-width: 180px;
+        .card-header {
+            background: #f5f3ea;
+            padding: 14px 24px;
+            border-bottom: 1px solid #e0d6c0;
+        }
+
+        .fabric-name {
+            font-size: 24px;
+            font-weight: 800;
+            color: #1e3a2f;
+            display: inline-block;
+        }
+
+        .fabric-latin {
+            font-size: 16px;
+            font-style: italic;
+            color: #8a7a5a;
+            margin-left: 12px;
+        }
+
+        .card-body {
+            display: flex;
+            flex-wrap: wrap;
+            padding: 20px 24px;
+            gap: 24px;
+        }
+
+        /* Левая колонка — визуал */
+        .visual-col {
+            flex: 1;
+            min-width: 200px;
+            background: #fefcf8;
+            border-radius: 16px;
+            padding: 16px;
             text-align: center;
+            border: 1px solid #eee6d8;
         }
 
-        .microscope-label {
+        .weave-icon {
+            font-size: 48px;
+            margin-bottom: 8px;
+        }
+
+        .weave-type {
             font-size: 13px;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            font-weight: bold;
-            background: #e9edf2;
+            font-weight: 600;
+            color: #b48c48;
+            background: #fef3df;
             display: inline-block;
             padding: 4px 12px;
-            border-radius: 20px;
-            margin-bottom: 12px;
-            color: #1e466e;
+            border-radius: 30px;
+            margin: 8px 0;
         }
 
-        .weave-place {
-            background: #f8f4e8;
-            border: 2px dashed #b9c8e8;
-            border-radius: 16px;
-            padding: 20px 10px;
-            text-align: center;
-            font-size: 14px;
-            color: #5a6e7c;
-            margin-bottom: 10px;
-        }
-
-        .weave-place img {
-            max-width: 100%;
+        .photo-place {
+            background: #eae5d8;
             border-radius: 12px;
-        }
-
-        .microscope-caption {
+            padding: 12px;
+            margin: 12px 0;
             font-size: 12px;
-            color: #5f6c7a;
-            margin-top: 8px;
+            color: #6a5e4a;
+            min-height: 120px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
         /* Правая колонка — характеристики */
-        .specs {
-            flex: 1.8;
+        .info-col {
+            flex: 2;
+            min-width: 260px;
         }
 
-        .fabric-title {
-            font-size: 22px;
-            font-weight: bold;
-            color: #1e466e;
-            border-left: 5px solid #c26b2e;
-            padding-left: 14px;
-            margin-bottom: 6px;
-        }
-
-        .fabric-sub {
-            font-style: italic;
-            color: #5a6e7c;
+        .properties {
+            background: #f8faf5;
+            padding: 14px 18px;
+            border-radius: 14px;
             margin-bottom: 12px;
-            padding-left: 18px;
-            font-size: 15px;
+            line-height: 1.5;
         }
 
-        .spec-row {
-            margin-bottom: 12px;
-            line-height: 1.45;
+        .properties strong {
+            color: #1e3a2f;
         }
 
-        .spec-label {
-            font-weight: bold;
-            color: #1e3a5f;
-            display: inline-block;
-            min-width: 75px;
+        .care {
+            background: #f5f3ee;
+            padding: 14px 18px;
+            border-radius: 14px;
+            line-height: 1.5;
         }
 
-        .divider-light {
+        .care strong {
+            color: #b48c48;
+        }
+
+        .badge-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 12px;
+        }
+
+        .badge {
+            background: white;
+            border-radius: 40px;
+            padding: 4px 14px;
+            font-size: 12px;
+            font-weight: 600;
+            color: #1e3a2f;
+            border: 1px solid #cbdcc0;
+        }
+
+        .divider {
             height: 1px;
-            background: #e2e8f0;
-            margin: 12px 0;
+            background: #e2e6dc;
+            margin: 16px 0;
         }
 
-        .care-tag {
-            background: #eef2f6;
-            padding: 6px 12px;
-            border-radius: 20px;
-            font-size: 13px;
-            display: inline-block;
-            margin-top: 6px;
-        }
-
-        /* Футер как в мамином примере */
         .footer-note {
             display: flex;
             justify-content: space-between;
             margin-top: 25px;
-            padding-top: 12px;
-            border-top: 1px solid #cbd5e1;
+            padding-top: 15px;
+            border-top: 1px solid #d0d8c5;
             font-size: 13px;
-            color: #2d4a6e;
+            color: #5a6e53;
         }
 
-        .warning-note {
-            background: #fef3e2;
-            padding: 12px 18px;
-            border-left: 5px solid #c26b2e;
-            margin: 20px 0 10px;
+        .warning-block {
+            background: #fef5e8;
+            border-left: 5px solid #e0a343;
+            padding: 16px 20px;
+            border-radius: 12px;
+            margin: 20px 0 0;
             font-size: 14px;
-            border-radius: 0 12px 12px 0;
+            line-height: 1.45;
         }
 
         @media print {
@@ -190,17 +217,15 @@
             }
             .page {
                 box-shadow: none;
+                border-radius: 0;
                 padding: 1.5cm;
                 margin: 0;
-                page-break-after: always;
             }
             .fabric-card {
                 break-inside: avoid;
-                border: 1px solid #aaa;
+                border: 1px solid #ccc;
             }
-            .weave-place {
-                border: 1px solid #aaa;
-                background: #f5f5f5;
+            .photo-place, .properties, .care, .badge {
                 -webkit-print-color-adjust: exact;
                 print-color-adjust: exact;
             }
@@ -209,160 +234,242 @@
 </head>
 <body>
 
-    <!-- СТРАНИЦА 1: ЧИСТЫЙ ХЛОПОК -->
+    <!-- ==================== СТРАНИЦА 1: ЧИСТЫЙ ХЛОПОК ==================== -->
     <div class="page">
-        <div class="title-main">ТКАНИ ПОД МИКРОСКОПОМ</div>
-        <div class="title-sub">🔬 100% хлопок — строение и уход</div>
+        <div class="title-main">ПАМЯТКА ПО ТКАНЯМ</div>
+        <div class="title-sub">🌿 100% хлопок — натуральное качество</div>
 
-        <!-- Бязь -->
+        <!-- БЯЗЬ -->
         <div class="fabric-card">
-            <div class="microscope">
-                <div class="microscope-label">🔬 ПЛЕТЕНИЕ ПОД МИКРОСКОПОМ</div>
-                <div class="weave-place">
-                    <img src="https://placehold.co/400x300/f5f0e0/8b7355?text=Бязь+переплетение+полотняное" alt="Плетение бязи" style="width:100%; border-radius:12px;">
-                    <div class="microscope-caption">Полотняное переплетение нитей (увеличено)</div>
-                </div>
+            <div class="card-header">
+                <span class="fabric-name">Бязь</span>
+                <span class="fabric-latin">Calico</span>
             </div>
-            <div class="specs">
-                <div class="fabric-title">Бязь (Calico)</div>
-                <div class="fabric-sub">100% хлопок | плотное полотняное плетение</div>
-                <div class="spec-row"><span class="spec-label">🧵 Свойства:</span> Прочная, «дышащая», матовая поверхность. Выдерживает много стирок. Идеальна для постельного белья и пелёнок. Даёт небольшую усадку после первой стирки.</div>
-                <div class="divider-light"></div>
-                <div class="spec-row"><span class="spec-label">💧 Уход:</span> Стирка 40–60°C, белое можно кипятить. Гладить горячим утюгом. <span class="care-tag">✓ выносливая</span></div>
+            <div class="card-body">
+                <div class="visual-col">
+                    <div class="weave-icon">〰️〰️</div>
+                    <div class="weave-type">полотняное переплетение</div>
+                    <div class="photo-place">📷 Место для фото бязи (крупным планом)</div>
+                </div>
+                <div class="info-col">
+                    <div class="properties">
+                        <strong>🧵 Свойства:</strong> Прочная, «дышащая» ткань с матовой поверхностью. Благодаря плотному полотняному переплетению нитей она выдерживает множество стирок, не теряя формы. Идеальна для повседневного использования: постельного белья, пеленок и домашнего текстиля. <strong>Может давать небольшую усадку после первой стирки.</strong>
+                        <div class="badge-group">
+                            <span class="badge">🌬️ дышит</span>
+                            <span class="badge">🧺 до 60°C</span>
+                            <span class="badge">🔥 горячий утюг</span>
+                            <span class="badge">💪 200+ стирок</span>
+                        </div>
+                    </div>
+                    <div class="care">
+                        <strong>💧 Уход:</strong> Машинная стирка при 40–60°C. Можно кипятить белые изделия. Гладить горячим утюгом.
+                    </div>
+                </div>
             </div>
         </div>
 
-        <!-- Поплин -->
+        <!-- ПОПЛИН -->
         <div class="fabric-card">
-            <div class="microscope">
-                <div class="microscope-label">🔬 ПЛЕТЕНИЕ ПОД МИКРОСКОПОМ</div>
-                <div class="weave-place">
-                    <img src="https://placehold.co/400x300/f5f0e0/8b7355?text=Поплин+рубчик+поперечный" alt="Плетение поплина" style="width:100%; border-radius:12px;">
-                    <div class="microscope-caption">Поперечный рубчик за счёт разной толщины нитей</div>
-                </div>
+            <div class="card-header">
+                <span class="fabric-name">Поплин</span>
+                <span class="fabric-latin">Poplin</span>
             </div>
-            <div class="specs">
-                <div class="fabric-title">Поплин (Poplin)</div>
-                <div class="fabric-sub">100% хлопок | мелкий поперечный рубчик</div>
-                <div class="spec-row"><span class="spec-label">🧵 Свойства:</span> Мягкий, гладкий, приятный к телу. Мнётся меньше бязи. Часто идёт на рубашки и качественное постельное бельё.</div>
-                <div class="divider-light"></div>
-                <div class="spec-row"><span class="spec-label">💧 Уход:</span> Деликатная стирка 30–40°C, отжим на средних оборотах. Легко гладится. <span class="care-tag">✓ нежный режим</span></div>
+            <div class="card-body">
+                <div class="visual-col">
+                    <div class="weave-icon">〰️📏</div>
+                    <div class="weave-type">поперечный рубчик (разная толщина нитей)</div>
+                    <div class="photo-place">📷 Место для фото поплина (виден рубчик)</div>
+                </div>
+                <div class="info-col">
+                    <div class="properties">
+                        <strong>🧵 Свойства:</strong> Мягкая и гладкая на ощупь ткань. Отличается от бязи более тонким поперечным рубчиком, который создается за счет разной толщины нитей основы и утка. Приятен к телу, <strong>меньше мнется, чем бязь</strong>. Часто используется для пошива рубашек и качественного постельного белья.
+                        <div class="badge-group">
+                            <span class="badge">✨ мягкий</span>
+                            <span class="badge">🚫 меньше мнётся</span>
+                            <span class="badge">💧 30–40°C</span>
+                        </div>
+                    </div>
+                    <div class="care">
+                        <strong>💧 Уход:</strong> Деликатный режим стирки при 30–40°C. Отжим на средних оборотах. Легко гладится.
+                    </div>
+                </div>
             </div>
         </div>
 
-        <!-- Сатин -->
+        <!-- САТИН -->
         <div class="fabric-card">
-            <div class="microscope">
-                <div class="microscope-label">🔬 ПЛЕТЕНИЕ ПОД МИКРОСКОПОМ</div>
-                <div class="weave-place">
-                    <img src="https://placehold.co/400x300/f0ede8/8b7355?text=Сатин+сатиновое+переплетение" alt="Сатиновое плетение" style="width:100%; border-radius:12px;">
-                    <div class="microscope-caption">Сатиновое переплетение: длинные перекрытия нитей</div>
-                </div>
+            <div class="card-header">
+                <span class="fabric-name">Сатин</span>
+                <span class="fabric-latin">Satin</span>
             </div>
-            <div class="specs">
-                <div class="fabric-title">Сатин (Satin)</div>
-                <div class="fabric-sub">100% хлопок | сатиновое плетение</div>
-                <div class="spec-row"><span class="spec-label">🧵 Свойства:</span> Гладкий блестящий верх, матовая изнанка. Очень прочный, почти не мнётся, дарит прохладу и шелковистость.</div>
-                <div class="divider-light"></div>
-                <div class="spec-row"><span class="spec-label">💧 Уход:</span> Деликатная 30–40°C, выворачивать наизнанку. Не сушить на солнце. <span class="care-tag">✨ премиум-уход</span></div>
+            <div class="card-body">
+                <div class="visual-col">
+                    <div class="weave-icon">✨✨</div>
+                    <div class="weave-type">сатиновое переплетение (нить утка через 4+ нитей основы)</div>
+                    <div class="photo-place">📷 Место для фото сатина (блестящая сторона)</div>
+                </div>
+                <div class="info-col">
+                    <div class="properties">
+                        <strong>🧵 Свойства:</strong> Роскошная ткань с гладкой, шелковистой лицевой стороной и матовой изнанкой. Эффект достигается благодаря сатиновому переплетению, где нить утка выходит на лицевую сторону через 4 и более нитей основы. <strong>Очень прочный, почти не мнется</strong>, дарит приятные тактильные ощущения и прохладу.
+                        <div class="badge-group">
+                            <span class="badge">💎 почти не мнётся</span>
+                            <span class="badge">🧴 шелковистый</span>
+                            <span class="badge">❄️ дарит прохладу</span>
+                            <span class="badge">⭐ премиум</span>
+                        </div>
+                    </div>
+                    <div class="care">
+                        <strong>💧 Уход:</strong> Стирка при 30–40°C на деликатном режиме. Желательно выворачивать наизнанку. Не сушить под прямыми солнечными лучами во избежание выцветания.
+                    </div>
+                </div>
             </div>
         </div>
 
-        <!-- Страйп-сатин -->
+        <!-- СТРАЙП-САТИН -->
         <div class="fabric-card">
-            <div class="microscope">
-                <div class="microscope-label">🔬 ПЛЕТЕНИЕ ПОД МИКРОСКОПОМ</div>
-                <div class="weave-place">
-                    <img src="https://placehold.co/400x300/f5f0e0/8b7355?text=Страйп-сатин+чередование+блеска+матовости" alt="Страйп-сатин плетение" style="width:100%; border-radius:12px;">
-                    <div class="microscope-caption">Чередование сатиновых и полотняных участков</div>
-                </div>
+            <div class="card-header">
+                <span class="fabric-name">Страйп-сатин</span>
+                <span class="fabric-latin">Stripe-satin</span>
             </div>
-            <div class="specs">
-                <div class="fabric-title">Страйп-сатин (Stripe-satin)</div>
-                <div class="fabric-sub">100% хлопок | комбинированное плетение</div>
-                <div class="spec-row"><span class="spec-label">🧵 Свойства:</span> Чередование матовых и блестящих полос. Все плюсы сатина + строгий элегантный вид.</div>
-                <div class="divider-light"></div>
-                <div class="spec-row"><span class="spec-label">💧 Уход:</span> Аналогичен сатину. <span class="care-tag">✓ как сатин</span></div>
+            <div class="card-body">
+                <div class="visual-col">
+                    <div class="weave-icon">📏✨📏</div>
+                    <div class="weave-type">чередование сатиновых и полотняных участков</div>
+                    <div class="photo-place">📷 Место для фото страйп-сатина (полосы)</div>
+                </div>
+                <div class="info-col">
+                    <div class="properties">
+                        <strong>🧵 Свойства:</strong> Это разновидность сатина, на котором чередованием матовых и блестящих полос образуется рисунок (полосы). Ткань обладает всеми достоинствами сатина: прочностью, блеском и мягкостью, но <strong>выглядит более строго и элегантно</strong>.
+                        <div class="badge-group">
+                            <span class="badge">🏛️ элегантный</span>
+                            <span class="badge">✨ блеск</span>
+                            <span class="badge">🚫 не мнётся</span>
+                        </div>
+                    </div>
+                    <div class="care">
+                        <strong>💧 Уход:</strong> Аналогичен уходу за обычным сатином.
+                    </div>
+                </div>
             </div>
         </div>
 
         <div class="footer-note">
-            <span>Гид по тканям • Страница 1</span>
-            <span>Чистый хлопок 🔬</span>
+            <span>📖 Гид по тканям • Страница 1</span>
+            <span>🌿 100% натуральный хлопок</span>
         </div>
     </div>
 
-    <!-- СТРАНИЦА 2: СМЕСОВЫЕ ТКАНИ -->
+    <!-- ==================== СТРАНИЦА 2: СМЕСОВЫЕ ТКАНИ ==================== -->
     <div class="page">
-        <div class="title-main">ТКАНИ ПОД МИКРОСКОПОМ</div>
-        <div class="title-sub">🧵 Смесовые ткани — строение и особенности</div>
+        <div class="title-main">ПАМЯТКА ПО ТКАНЯМ</div>
+        <div class="title-sub">🧵 Смесовые ткани — прочность и практичность</div>
 
-        <!-- Тик 80/20 -->
+        <!-- ТИК 80/20 -->
         <div class="fabric-card">
-            <div class="microscope">
-                <div class="microscope-label">🔬 ПЛЕТЕНИЕ ПОД МИКРОСКОПОМ</div>
-                <div class="weave-place">
-                    <img src="https://placehold.co/400x300/f0ede8/8b7355?text=Тик+плотное+переплетение+смесовая+нить" alt="Плетение тика" style="width:100%; border-radius:12px;">
-                    <div class="microscope-caption">Плотное полотняное плетение, смесовная нить</div>
-                </div>
+            <div class="card-header">
+                <span class="fabric-name">Тик 80/20</span>
+                <span class="fabric-latin">Tick 80/20</span>
             </div>
-            <div class="specs">
-                <div class="fabric-title">Тик 80/20 (Tick 80/20)</div>
-                <div class="fabric-sub">80% хлопок + 20% полиэстер | полотняное плетение</div>
-                <div class="spec-row"><span class="spec-label">🧵 Свойства:</span> Меньше мнётся, быстро сохнет, дольше служит. Хорошо держит пух/перо — идеален для наперников и чехлов.</div>
-                <div class="divider-light"></div>
-                <div class="spec-row"><span class="spec-label">💧 Уход:</span> Стирка 40–60°C, можно машинную сушку. <span class="care-tag">⚡ практичный</span></div>
+            <div class="card-body">
+                <div class="visual-col">
+                    <div class="weave-icon">🧵🧵</div>
+                    <div class="weave-type">плотное полотняное переплетение</div>
+                    <div class="photo-place">📷 Место для фото тика 80/20</div>
+                </div>
+                <div class="info-col">
+                    <div class="properties">
+                        <strong>🧵 Состав:</strong> 80% хлопок, 20% полиэстер.<br>
+                        <strong>Свойства:</strong> Сочетает комфорт хлопка и практичность синтетики. Такая ткань <strong>меньше мнется, быстрее сохнет и служит дольше</strong> чистого хлопка. Часто используется для наперников, чехлов подушек и одеял, так как хорошо удерживает пух и перо внутри.
+                        <div class="badge-group">
+                            <span class="badge">⚡ быстро сохнет</span>
+                            <span class="badge">🧹 меньше мнётся</span>
+                            <span class="badge">🪶 держит пух/перо</span>
+                        </div>
+                    </div>
+                    <div class="care">
+                        <strong>💧 Уход:</strong> Машинная стирка при 40–60°C. Хорошо переносит машинную сушку.
+                    </div>
+                </div>
             </div>
         </div>
 
-        <!-- Тик П/Э -->
+        <!-- ТИК П/Э -->
         <div class="fabric-card">
-            <div class="microscope">
-                <div class="microscope-label">🔬 ПЛЕТЕНИЕ ПОД МИКРОСКОПОМ</div>
-                <div class="weave-place">
-                    <img src="https://placehold.co/400x300/f5f0e0/8b7355?text=Тик+ПЭ+усиленное+переплетение" alt="Тик ПЭ плетение" style="width:100%; border-radius:12px;">
-                    <div class="microscope-caption">Очень плотное переплетение, высокая износостойкость</div>
-                </div>
+            <div class="card-header">
+                <span class="fabric-name">Тик П/Э</span>
+                <span class="fabric-latin">Tick Polyester</span>
             </div>
-            <div class="specs">
-                <div class="fabric-title">Тик П/Э (Tick Polyester)</div>
-                <div class="fabric-sub">50–65% ПЭ + 35–50% хлопок | усиленное плетение</div>
-                <div class="spec-row"><span class="spec-label">🧵 Свойства:</span> Максимальная износостойкость, почти без усадки. Идеален для матрасников и жёсткой эксплуатации.</div>
-                <div class="divider-light"></div>
-                <div class="spec-row"><span class="spec-label">💧 Уход:</span> Стирка до 90°C, быстро сохнет, почти не требует глажки. <span class="care-tag">🔥 термостойкий</span></div>
+            <div class="card-body">
+                <div class="visual-col">
+                    <div class="weave-icon">🏋️🔩</div>
+                    <div class="weave-type">усиленное полотняное переплетение</div>
+                    <div class="photo-place">📷 Место для фото тика П/Э</div>
+                </div>
+                <div class="info-col">
+                    <div class="properties">
+                        <strong>🧵 Состав:</strong> Обычно около 50–65% полиэстера и 35–50% хлопка.<br>
+                        <strong>Свойства:</strong> Более износостойкий и дешевый вариант тика. <strong>Практически не дает усадки</strong>, очень прочен, отлично подходит для изделий, которые подвергаются интенсивной эксплуатации (например, матрасники).
+                        <div class="badge-group">
+                            <span class="badge">💪 самый прочный</span>
+                            <span class="badge">🚫 без усадки</span>
+                            <span class="badge">🔥 до 90°C</span>
+                            <span class="badge">🚫 глажка не нужна</span>
+                        </div>
+                    </div>
+                    <div class="care">
+                        <strong>💧 Уход:</strong> Выдерживает высокие температуры стирки (до 90°C), быстро сохнет и практически не требует глажки.
+                    </div>
+                </div>
             </div>
         </div>
 
-        <!-- Микрофибра -->
+        <!-- МИКРОФИБРА -->
         <div class="fabric-card">
-            <div class="microscope">
-                <div class="microscope-label">🔬 ПЛЕТЕНИЕ ПОД МИКРОСКОПОМ</div>
-                <div class="weave-place">
-                    <img src="https://placehold.co/400x300/e8edf2/5a6e7c?text=Микрофибра+ультратонкие+волокна" alt="Микрофибра структура" style="width:100%; border-radius:12px;">
-                    <div class="microscope-caption">Ультратонкие синтетические волокна (под микроскопом)</div>
-                </div>
+            <div class="card-header">
+                <span class="fabric-name">Микрофибра</span>
+                <span class="fabric-latin">Microfiber</span>
             </div>
-            <div class="specs">
-                <div class="fabric-title">Микрофибра (Microfiber)</div>
-                <div class="fabric-sub">100% ПЭ или ПЭ+полиамид | микроволокна</div>
-                <div class="spec-row"><span class="spec-label">🧵 Свойства:</span> Супергигроскопична, мгновенно сохнет. Может электризоваться, со временем — катышки. Отлично впитывает.</div>
-                <div class="divider-light"></div>
-                <div class="spec-row"><span class="spec-label">💧 Уход:</span> Стирка до 40°C, БЕЗ кондиционера и хлора. Сушить вдали от батарей. <span class="care-tag">⚠️ без КМС</span></div>
+            <div class="card-body">
+                <div class="visual-col">
+                    <div class="weave-icon">💧🌀</div>
+                    <div class="weave-type">ультратонкие синтетические волокна</div>
+                    <div class="photo-place">📷 Место для фото микрофибры</div>
+                </div>
+                <div class="info-col">
+                    <div class="properties">
+                        <strong>🧵 Состав:</strong> 100% полиэстер или смесь полиэстера с полиамидом.<br>
+                        <strong>Свойства:</strong> Искусственная ткань из ультратонких волокон. Главное преимущество — <strong>высокая гигроскопичность</strong>: она впитывает много влаги и быстро сохнет. Устойчива к износу, не линяет. <strong>Из минусов</strong> — может накапливать статическое электричество и со временем покрываться катышками.
+                        <div class="badge-group">
+                            <span class="badge">💧 супервпитывание</span>
+                            <span class="badge">🌀 мгновенно сохнет</span>
+                            <span class="badge">⚡ может электризоваться</span>
+                        </div>
+                    </div>
+                    <div class="care">
+                        <strong>💧 Уход:</strong> Стирка при температуре до 40°C. Нельзя использовать кондиционеры для белья (они ухудшают впитывающие свойства) и отбеливатели на основе хлора. Сушить вдали от нагревательных приборов.
+                    </div>
+                </div>
             </div>
         </div>
 
-        <div class="warning-note">
-            <strong>🔬 Важное правило:</strong> Всегда сверяйтесь с ярлычком на изделии. Разные производители могут использовать особые пропитки и смесовые нити, которые требуют особого ухода.
+        <!-- Важное правило -->
+        <div class="warning-block">
+            <strong>⚠️ Важное правило:</strong> Всегда сверяйтесь с ярлычком на изделии перед стиркой, так как производители могут добавлять специальные пропитки или использовать смесовые нити, требующие особого ухода.
         </div>
 
         <div class="footer-note">
-            <span>Гид по тканям • Страница 2</span>
-            <span>Смесовые ткани 🔬</span>
+            <span>📖 Гид по тканям • Страница 2</span>
+            <span>🧵 Смесовые ткани и микрофибра</span>
         </div>
     </div>
 
     <script>
-        console.log('Памятка с лупой готова! Для PDF: Ctrl+P → "Сохранить как PDF"');
+        console.log('Полный визуальный гид готов. Для PDF: Ctrl+P → "Сохранить как PDF" (включить фоновую графику)');
     </script>
+    <div style="text-align: center; margin-top: 20px;">
+    <button onclick="window.print();" style="background: #1a3f2c; color: white; border: none; padding: 12px 28px; font-size: 16px; border-radius: 40px; cursor: pointer; font-weight: bold;">
+        📄 Сохранить как PDF (Ctrl+P)
+    </button>
+    </div>
 </body>
 </html>
